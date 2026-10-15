@@ -1,8 +1,9 @@
 /**
- * PM2 config for rankkw.site on the Contabo server (next to rankkw.com).
+ * PM2 config for rankkw.site.
  *
- * Its own app name and port, so it never touches rankkw.com (PM2 app `rankkw`,
- * port 3000). It listens on 127.0.0.1 only: the public reaches it through nginx.
+ * Its own app name and port, so it never touches other sites on the same server
+ * (rankkw.online runs on 3300). It listens on 127.0.0.1 only: the public
+ * reaches it through nginx.
  *
  *   pm2 start ecosystem.config.cjs     # first time
  *   pm2 save                           # keep it across reboots
