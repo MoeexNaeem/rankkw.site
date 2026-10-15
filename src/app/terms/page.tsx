@@ -385,7 +385,7 @@ export default function TermsPage() {
                     }}
                   >
                     <a
-                      href="mailto:support@rankkw.online"
+                      href="mailto:support@rankkw.site"
                       style={{
                         display: 'flex',
                         alignItems: 'center',
@@ -397,10 +397,10 @@ export default function TermsPage() {
                       }}
                     >
                       <span style={{ opacity: 0.6, fontSize: 12 }}>EMAIL</span>
-                      support@rankkw.online
+                      support@rankkw.site
                     </a>
                     <a
-                      href="https://rankkw.online/contact"
+                      href="https://rankkw.site/contact"
                       style={{
                         display: 'flex',
                         alignItems: 'center',
@@ -412,7 +412,7 @@ export default function TermsPage() {
                       }}
                     >
                       <span style={{ opacity: 0.6, fontSize: 12 }}>WEB</span>
-                      rankkw.online/contact
+                      rankkw.site/contact
                     </a>
                   </div>
                 )}

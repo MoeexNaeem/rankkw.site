@@ -1,21 +1,21 @@
 #!/usr/bin/env bash
-# One-time setup of rankkw.online on this server (run as root, from the cloned
+# One-time setup of rankkw.site on this server (run as root, from the cloned
 # repo). Safe to re-run.
 #
-#   git clone https://github.com/MoeexNaeem/Ranksty.co.git /www/wwwroot/rankkw-online
-#   bash /www/wwwroot/rankkw-online/scripts/server/setup.sh
+#   git clone https://github.com/MoeexNaeem/rankkw.site.git /www/wwwroot/rankkw-site
+#   bash /www/wwwroot/rankkw-site/scripts/server/setup.sh
 #
 # Installs Node.js + PM2 if missing, asks you to paste the .env.local, builds and
-# starts the site as PM2 app `rankkw-online` on 127.0.0.1:3300, and puts nginx in
-# front for rankkw.online (Cloudflare connects to it on port 443). Other sites on
-# this server (guestposting.live on 3100, anything on port 80) are left untouched.
+# starts the site as PM2 app `rankkw-site` on 127.0.0.1:3400, and puts nginx in
+# front for rankkw.site (Cloudflare connects to it on port 443). Other sites on
+# this server (guestposting.live on 3100, rankkw.online on 3300, anything on port 80) are left untouched.
 set -euo pipefail
 
 main() {
 
-APP=rankkw-online
-DOMAIN=rankkw.online
-PORT=3300
+APP=rankkw-site
+DOMAIN=rankkw.site
+PORT=3400
 APP_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
 
 say()  { printf '\n\033[1;32m==> %s\033[0m\n' "$*"; }
@@ -24,7 +24,7 @@ die()  { printf '\n\033[1;31mXX  %s\033[0m\n' "$*"; exit 1; }
 
 [ "$(id -u)" = 0 ] || die "Please run this as root."
 cd "$APP_DIR"
-[ -f package.json ] && grep -q '"name": "rankkw-online"' package.json || die "Run this from the rankkw.online code folder (got $APP_DIR)."
+[ -f package.json ] && grep -q '"name": "rankkw-site"' package.json || die "Run this from the rankkw.site code folder (got $APP_DIR)."
 
 if command -v apt-get >/dev/null 2>&1; then PKG=apt
 elif command -v dnf >/dev/null 2>&1; then PKG=dnf
@@ -70,7 +70,7 @@ say "2/7 Settings (.env.local)"
 if [ -f .env.local ]; then
   echo "Keeping the existing $APP_DIR/.env.local"
 else
-  echo "Open D:\\LET RANK\\Ranktsy\\.env.server on your PC, copy ALL of it,"
+  echo "Open D:\\LET RANK\\rankkw.site\\.env.server on your PC, copy ALL of it,"
   echo "paste it here, then press Enter and Ctrl+D."
   umask 077
   cat > .env.local.tmp </dev/tty
@@ -80,7 +80,7 @@ else
   echo "Saved $APP_DIR/.env.local"
 fi
 grep -q '^MONGODB_URI=.*/guestpost?' .env.local && die "MONGODB_URI points at the guestpost database (the guest post site's). Use /rankkw_online instead."
-grep -qE '^ETSY_API_KEY=.+' .env.local || warn "ETSY_API_KEY is empty: the site will run, but Etsy tools fail until you add the rankkw.online Etsy app's keystring and shared secret."
+grep -qE '^ETSY_API_KEY=.+' .env.local || warn "ETSY_API_KEY is empty: the site will run, but Etsy tools fail until you add the rankkw.site Etsy app's keystring and shared secret."
 
 # ---------------------------------------------------------------- 3. build + run
 say "3/7 Building and starting (a few minutes)"
@@ -120,7 +120,7 @@ fi
 mkdir -p "$CONF_DIR"
 
 # Certificate for the Cloudflare -> server hop (Cloudflare SSL/TLS mode "Full").
-CERT_DIR=/etc/ssl/rankkw-online
+CERT_DIR=/etc/ssl/rankkw-site
 if [ ! -s "$CERT_DIR/fullchain.pem" ]; then
   mkdir -p "$CERT_DIR"
   openssl req -x509 -nodes -newkey rsa:2048 -days 3650 \
@@ -132,7 +132,7 @@ if [ "$HTTPS_ONLY" = 1 ]; then LISTEN="listen 443 ssl;"; else LISTEN="listen 80;
     listen 443 ssl;"; fi
 
 cat > "$CONF_DIR/$DOMAIN.conf" <<EOF
-# rankkw.online -> Next.js on 127.0.0.1:$PORT (written by scripts/server/setup.sh)
+# rankkw.site -> Next.js on 127.0.0.1:$PORT (written by scripts/server/setup.sh)
 server {
     $LISTEN
     server_name www.$DOMAIN;
@@ -178,8 +178,8 @@ fi
 say "5/7 Daily snapshot job (03:00)"
 CRON_SECRET=$(grep -E '^CRON_SECRET=' .env.local | head -1 | cut -d= -f2- | tr -d "\"'")
 if [ -n "$CRON_SECRET" ]; then
-  LINE="0 3 * * * curl -s -m 600 -H 'Authorization: Bearer $CRON_SECRET' http://127.0.0.1:$PORT/api/cron/snapshot >/dev/null 2>&1 # rankkw-online"
-  ( crontab -l 2>/dev/null | grep -v '# rankkw-online$' || true; echo "$LINE" ) | crontab -
+  LINE="0 3 * * * curl -s -m 600 -H 'Authorization: Bearer $CRON_SECRET' http://127.0.0.1:$PORT/api/cron/snapshot >/dev/null 2>&1 # rankkw-site"
+  ( crontab -l 2>/dev/null | grep -v '# rankkw-site$' || true; echo "$LINE" ) | crontab -
   echo "Added (crontab -l to see it)"
 else
   warn "No CRON_SECRET in .env.local: the daily snapshot job was not added."
@@ -200,7 +200,7 @@ fi
 # ---------------------------------------------------------------- 7. done
 say "7/7 Done"
 if [ "$problems" = 0 ]; then
-  echo "rankkw.online is running. In Cloudflare: A record @ -> this server (orange cloud), SSL/TLS mode Full."
+  echo "rankkw.site is running. In Cloudflare: A record @ -> this server (orange cloud), SSL/TLS mode Full."
 else
   warn "Setup finished with the problems above."
 fi

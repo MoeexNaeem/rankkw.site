@@ -1,13 +1,13 @@
 /**
  * Google reCAPTCHA v2 — server-side token verification.
  *
- * REMOVED from rankkw.online: both entry points below are hard-disabled, so no captcha
+ * REMOVED from rankkw.site: both entry points below are hard-disabled, so no captcha
  * is verified or required anywhere. Kept as inert stubs (rather than deleted) so
  * the routes and search gate that import them keep compiling unchanged.
  */
 
 /**
- * Captcha has been REMOVED from rankkw.online. Forced off so the search gate is fully
+ * Captcha has been REMOVED from rankkw.site. Forced off so the search gate is fully
  * dormant (guardSearch returns null → no captcha challenge and no search block)
  * regardless of environment keys.
  */

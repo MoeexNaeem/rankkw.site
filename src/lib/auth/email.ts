@@ -8,11 +8,11 @@ const transporter = nodemailer.createTransport({
   auth: process.env.SMTP_USER ? { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS } : undefined,
 })
 
-// Prefer an explicit EMAIL_FROM (e.g. `Rankkw Support <support@rankkw.online>`).
+// Prefer an explicit EMAIL_FROM (e.g. `Rankkw Support <support@rankkw.site>`).
 // Fall back to the authenticated SMTP user so the From address always matches
 // the mailbox we log in as — providers like Namecheap Private Email reject a
 // From that differs from the authenticated user.
-const FROM = process.env.EMAIL_FROM || `"Rankkw" <${process.env.SMTP_USER ?? 'noreply@rankkw.online'}>`
+const FROM = process.env.EMAIL_FROM || `"Rankkw" <${process.env.SMTP_USER ?? 'noreply@rankkw.site'}>`
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'
 
 export async function sendOtpEmail(email: string, otp: string, type: 'reset' | 'verify') {
@@ -92,12 +92,12 @@ const escHtml = (s: string) => s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': 
 
 /**
  * A message from the public contact form, delivered to the support inbox
- * (SUPPORT_EMAIL, else support@rankkw.online). Reply-To is the sender, so
+ * (SUPPORT_EMAIL, else support@rankkw.site). Reply-To is the sender, so
  * answering it in the inbox goes straight back to them.
  */
 export async function sendContactEmail(m: { name: string; email: string; subject: string; message: string; ip: string }) {
-  const to = process.env.SUPPORT_EMAIL || 'support@rankkw.online'
-  const text = `${m.message}\n\n--\nFrom: ${m.name} <${m.email}>\nSubject: ${m.subject}\nIP: ${m.ip}\nSent from the rankkw.online contact form`
+  const to = process.env.SUPPORT_EMAIL || 'support@rankkw.site'
+  const text = `${m.message}\n\n--\nFrom: ${m.name} <${m.email}>\nSubject: ${m.subject}\nIP: ${m.ip}\nSent from the rankkw.site contact form`
   await transporter.sendMail({
     from: FROM,
     to,
@@ -107,7 +107,7 @@ export async function sendContactEmail(m: { name: string; email: string; subject
     html: `<div style="font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:#111827">
       <p style="white-space:pre-wrap">${escHtml(m.message)}</p>
       <hr style="border:none;border-top:1px solid #E5E7EB">
-      <p style="color:#6B7280;font-size:12.5px">From: ${escHtml(m.name)} &lt;${escHtml(m.email)}&gt;<br>Subject: ${escHtml(m.subject)}<br>IP: ${escHtml(m.ip)}<br>Sent from the rankkw.online contact form</p>
+      <p style="color:#6B7280;font-size:12.5px">From: ${escHtml(m.name)} &lt;${escHtml(m.email)}&gt;<br>Subject: ${escHtml(m.subject)}<br>IP: ${escHtml(m.ip)}<br>Sent from the rankkw.site contact form</p>
     </div>`,
   })
 }

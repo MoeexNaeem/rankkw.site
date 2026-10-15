@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
-# Deploy rankkw.online with (almost) no downtime. Same method as rankkw.com:
+# Deploy rankkw.site with (almost) no downtime. Same method as rankkw.com:
 # the new build goes into .next-build while the live site keeps serving .next;
 # only a complete build is swapped in, then the workers restart and a health
 # check runs. A build that does not come up healthy is rolled back by itself.
 #
-# Usage (on the server, in /www/wwwroot/rankkw-online):   bash scripts/deploy.sh
+# Usage (on the server, in /www/wwwroot/rankkw-site):   bash scripts/deploy.sh
 # Roll back to the previous build by hand:
-#   mv .next .next-bad && mv .next-old .next && pm2 restart rankkw-online
+#   mv .next .next-bad && mv .next-old .next && pm2 restart rankkw-site
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-APP=rankkw-online
-PORT=${PORT:-3300}
+APP=rankkw-site
+PORT=${PORT:-3400}
 HEALTH="http://127.0.0.1:${PORT}/api/health"
 
 echo "==> Pulling latest code"

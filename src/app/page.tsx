@@ -6,7 +6,7 @@ import { DashboardSection }    from '@/components/landing/DashboardSection'
 export const revalidate = 86400
 
 /**
- * rankkw.online landing: the new vibrant DESIGN (Nav / split Hero + dashboard preview /
+ * rankkw.site landing: the new vibrant DESIGN (Nav / split Hero + dashboard preview /
  * colourful Tools grid) followed by Rankkw's REAL content, verbatim — Features,
  * HowItWorks, the live KeywordTool, DashboardSection, About/Contact teaser, the
  * CTA and the full Footer (which links to every page: Methodology, Service

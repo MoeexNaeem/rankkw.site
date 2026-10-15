@@ -44,7 +44,7 @@ const sections = [
     title: 'How to Request a Refund',
     content: 'To request a refund, email us with your account details and the reason for your request. We aim to review and respond to refund requests within 5 business days.',
     bullets: [
-      { label: 'Step 1', text: 'Email support@rankkw.online with the subject line "Refund Request" and the email address associated with your Rankkw account.' },
+      { label: 'Step 1', text: 'Email support@rankkw.site with the subject line "Refund Request" and the email address associated with your Rankkw account.' },
       { label: 'Step 2', text: 'Include the transaction date and, if available, the payment reference or receipt.' },
       { label: 'Step 3', text: 'We will review the request against the eligibility criteria above and respond with our decision.' },
     ],
@@ -313,7 +313,7 @@ export default function RefundPolicyPage() {
                     }}
                   >
                     <a
-                      href="mailto:support@rankkw.online"
+                      href="mailto:support@rankkw.site"
                       style={{
                         display: 'flex',
                         alignItems: 'center',
@@ -325,10 +325,10 @@ export default function RefundPolicyPage() {
                       }}
                     >
                       <span style={{ opacity: 0.6, fontSize: 12 }}>EMAIL</span>
-                      support@rankkw.online
+                      support@rankkw.site
                     </a>
                     <a
-                      href="https://rankkw.online/contact"
+                      href="https://rankkw.site/contact"
                       style={{
                         display: 'flex',
                         alignItems: 'center',
@@ -340,7 +340,7 @@ export default function RefundPolicyPage() {
                       }}
                     >
                       <span style={{ opacity: 0.6, fontSize: 12 }}>WEB</span>
-                      rankkw.online/contact
+                      rankkw.site/contact
                     </a>
                   </div>
                 )}

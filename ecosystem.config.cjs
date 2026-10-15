@@ -1,22 +1,22 @@
 /**
- * PM2 config for rankkw.online on the Contabo server (next to rankkw.com).
+ * PM2 config for rankkw.site on the Contabo server (next to rankkw.com).
  *
  * Its own app name and port, so it never touches rankkw.com (PM2 app `rankkw`,
  * port 3000). It listens on 127.0.0.1 only: the public reaches it through nginx.
  *
  *   pm2 start ecosystem.config.cjs     # first time
  *   pm2 save                           # keep it across reboots
- *   pm2 logs rankkw-online             # live logs
+ *   pm2 logs rankkw-site             # live logs
  *
  * Deploys after that: bash scripts/deploy.sh
  */
-const PORT = Number(process.env.PORT) || 3300
+const PORT = Number(process.env.PORT) || 3400
 const INSTANCES = Number(process.env.PM2_INSTANCES) || 2
 
 module.exports = {
   apps: [
     {
-      name: 'rankkw-online',
+      name: 'rankkw-site',
       script: 'node_modules/next/dist/bin/next',
       args: `start -p ${PORT} -H 127.0.0.1`,
       exec_mode: 'cluster',

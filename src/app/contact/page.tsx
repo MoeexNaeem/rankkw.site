@@ -25,8 +25,8 @@ const CONTACT_CHANNELS: {
   {
     icon: 'mail',
     label: 'Email',
-    value: 'support@rankkw.online',
-    href: 'mailto:support@rankkw.online',
+    value: 'support@rankkw.site',
+    href: 'mailto:support@rankkw.site',
     desc: 'Support, billing, partnerships and press — everything reaches the same inbox. We reply within 24 hours on business days.',
   },
   {
@@ -97,9 +97,9 @@ export default function ContactPage() {
       const r = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) })
       const d = await r.json().catch(() => null)
       if (r.ok && d?.success) setSubmitted(true)
-      else setError(d?.error || 'Your message could not be sent. Please email support@rankkw.online directly.')
+      else setError(d?.error || 'Your message could not be sent. Please email support@rankkw.site directly.')
     } catch {
-      setError('Your message could not be sent. Please email support@rankkw.online directly.')
+      setError('Your message could not be sent. Please email support@rankkw.site directly.')
     } finally {
       setSending(false)
     }

@@ -39,6 +39,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true })
   } catch (e) {
     console.error('[contact] send failed:', e)
-    return NextResponse.json({ success: false, error: 'Your message could not be sent. Please email support@rankkw.online directly.' }, { status: 502 })
+    return NextResponse.json({ success: false, error: 'Your message could not be sent. Please email support@rankkw.site directly.' }, { status: 502 })
   }
 }

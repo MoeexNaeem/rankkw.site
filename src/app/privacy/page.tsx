@@ -225,8 +225,8 @@ export default function PrivacyPage() {
               Welcome to Rankkw ("we," "our," or "us"). We are committed to protecting your privacy
               and ensuring a transparent relationship with our users. This Privacy Policy explains how
               we collect, use, disclose, and safeguard your information when you visit our website at{' '}
-              <a href="https://rankkw.online" style={{ color: C.orange, textDecoration: 'underline' }}>
-                rankkw.online
+              <a href="https://rankkw.site" style={{ color: C.orange, textDecoration: 'underline' }}>
+                rankkw.site
               </a>
               .
             </p>
@@ -335,7 +335,7 @@ export default function PrivacyPage() {
                     }}
                   >
                     <a
-                      href="mailto:support@rankkw.online"
+                      href="mailto:support@rankkw.site"
                       style={{
                         display: 'flex',
                         alignItems: 'center',
@@ -347,10 +347,10 @@ export default function PrivacyPage() {
                       }}
                     >
                       <span style={{ opacity: 0.6, fontSize: 12 }}>EMAIL</span>
-                      support@rankkw.online
+                      support@rankkw.site
                     </a>
                     <a
-                      href="https://rankkw.online"
+                      href="https://rankkw.site"
                       style={{
                         display: 'flex',
                         alignItems: 'center',
@@ -362,7 +362,7 @@ export default function PrivacyPage() {
                       }}
                     >
                       <span style={{ opacity: 0.6, fontSize: 12 }}>WEB</span>
-                      rankkw.online
+                      rankkw.site
                     </a>
                   </div>
                 )}

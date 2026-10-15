@@ -1,6 +1,6 @@
 'use client'
 /**
- * rankkw.online landing: vibrant SaaS design (orange/purple/green). Exports the
+ * rankkw.site landing: vibrant SaaS design (orange/purple/green). Exports the
  * nav, the split hero with its dashboard preview, and the colorful tool grid; the
  * page composes them with the real content sections (app/page.tsx). Pricing is
  * intentionally omitted. No invented figures, testimonials or press logos: only
